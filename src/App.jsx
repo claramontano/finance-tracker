@@ -2,6 +2,7 @@ import { FinanceProvider } from './context/FinanceContext'
 import Header from './components/Header'
 import Summary from './components/Summary'
 import Filters from './components/Filters'
+import TransactionForm from './components/TransactionForm'
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <main className="max-w-7xl mx-auto px-6 py-8">
           <Summary />
           <Filters />
+          <TransactionForm />
         </main>
       </div>
     </FinanceProvider>
