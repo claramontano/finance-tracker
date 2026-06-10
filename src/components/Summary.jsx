@@ -3,16 +3,16 @@ import { formatCurrency } from '../utils/formatters'
 
 function StatCard({ title, value, icon, color, subtitle }) {
   return (
-    <div className={`bg-gray-900 rounded-2xl p-5 border border-gray-800 hover:border-gray-700 transition-all`}>
-      <div className="flex items-center justify-between mb-3">
-        <span className="text-gray-400 text-sm font-medium">{title}</span>
-        <span className="text-2xl">{icon}</span>
+    <div className="bg-gray-900 rounded-2xl p-6 border border-gray-800 hover:border-gray-700 transition-all">
+      <div className="flex items-center justify-between mb-4">
+        <span className="text-gray-400 text-base font-medium">{title}</span>
+        <span className="text-3xl">{icon}</span>
       </div>
-      <div className={`text-2xl font-black tracking-tight ${color}`}>
+      <div className={`text-3xl font-black tracking-tight ${color}`}>
         {value}
       </div>
       {subtitle && (
-        <p className="text-xs text-gray-500 mt-1">{subtitle}</p>
+        <p className="text-sm text-gray-500 mt-2">{subtitle}</p>
       )}
     </div>
   )
