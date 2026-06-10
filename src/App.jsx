@@ -2,7 +2,6 @@ import { FinanceProvider } from './context/FinanceContext'
 import Header from './components/Header'
 import Summary from './components/Summary'
 import Filters from './components/Filters'
-import TransactionForm from './components/TransactionForm'
 import TransactionList from './components/TransactionList'
 import Charts from './components/Charts'
 import BudgetTracker from './components/BudgetTracker'
@@ -17,7 +16,6 @@ function App() {
           <Charts />
           <BudgetTracker />
           <Filters />
-          <TransactionForm />
           <TransactionList />
         </main>
       </div>

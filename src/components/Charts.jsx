@@ -5,7 +5,7 @@ import { formatCurrency } from '../utils/formatters'
 import {
   PieChart, Pie, Cell, Tooltip, ResponsiveContainer,
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend,
-  LineChart, Line, Area, AreaChart
+  Area, AreaChart
 } from 'recharts'
 
 function CustomTooltip({ active, payload, label }) {
@@ -23,11 +23,11 @@ function CustomTooltip({ active, payload, label }) {
 }
 
 export default function Charts() {
-  const { transactions } = useFinance()
+  const { transactions, filteredTransactions } = useFinance()
 
-  // Datos para gráfica de dona (gastos por categoría)
+  // Dona — usa filteredTransactions
   const pieData = useMemo(() => {
-    const expenses = transactions.filter(t => t.type === 'expense')
+    const expenses = filteredTransactions.filter(t => t.type === 'expense')
     const byCategory = {}
     expenses.forEach(t => {
       byCategory[t.category] = (byCategory[t.category] || 0) + t.amount
@@ -39,12 +39,12 @@ export default function Charts() {
       })
       .sort((a, b) => b.value - a.value)
       .slice(0, 6)
-  }, [transactions])
+  }, [filteredTransactions])
 
-  // Datos para gráfica de barras (últimos 6 meses)
+  // Barras — usa filteredTransactions
   const barData = useMemo(() => {
     const months = {}
-    transactions.forEach(t => {
+    filteredTransactions.forEach(t => {
       const key = t.date.slice(0, 7)
       if (!months[key]) months[key] = { month: key, ingresos: 0, gastos: 0 }
       if (t.type === 'income') months[key].ingresos += t.amount
@@ -59,9 +59,9 @@ export default function Charts() {
         ingresos: Math.round(m.ingresos),
         gastos: Math.round(m.gastos),
       }))
-  }, [transactions])
+  }, [filteredTransactions])
 
-  // Datos para gráfica de área (evolución del balance)
+  // Área — siempre histórico completo
   const areaData = useMemo(() => {
     let balance = 0
     const sorted = [...transactions].sort((a, b) => a.date.localeCompare(b.date))
@@ -87,9 +87,7 @@ export default function Charts() {
           <ResponsiveContainer width="50%" height={200}>
             <PieChart>
               <Pie data={pieData} cx="50%" cy="50%" innerRadius={55} outerRadius={85} paddingAngle={3} dataKey="value">
-                {pieData.map((entry, i) => (
-                  <Cell key={i} fill={entry.color} />
-                ))}
+                {pieData.map((entry, i) => <Cell key={i} fill={entry.color} />)}
               </Pie>
               <Tooltip content={<CustomTooltip />} />
             </PieChart>
@@ -124,9 +122,10 @@ export default function Charts() {
         </ResponsiveContainer>
       </div>
 
-      {/* Gráfica de área — evolución balance */}
+      {/* Gráfica de área — histórico completo */}
       <div className="bg-gray-900 rounded-2xl p-6 border border-gray-800 lg:col-span-2">
-        <h3 className="font-bold text-white mb-5">Evolución del balance</h3>
+        <h3 className="font-bold text-white mb-1">Evolución del balance</h3>
+        <p className="text-xs text-gray-500 mb-5">Histórico completo — no se ve afectado por el filtro de mes</p>
         <ResponsiveContainer width="100%" height={200}>
           <AreaChart data={areaData}>
             <defs>
