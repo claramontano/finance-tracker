@@ -4,6 +4,7 @@ import Summary from './components/Summary'
 import Filters from './components/Filters'
 import TransactionForm from './components/TransactionForm'
 import TransactionList from './components/TransactionList'
+import Charts from './components/Charts'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Header />
         <main className="max-w-7xl mx-auto px-6 py-8">
           <Summary />
+          <Charts />
           <Filters />
           <TransactionForm />
           <TransactionList />
