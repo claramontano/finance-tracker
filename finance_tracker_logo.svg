@@ -1,0 +1,32 @@
+<svg viewBox="0 0 320 80" xmlns="http://www.w3.org/2000/svg" role="img">
+  <title style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">FinanceTracker logo</title>
+  <defs>
+    <linearGradient id="iconGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#38bdf8"/>
+      <stop offset="100%" style="stop-color:#2dd4bf"/>
+    </linearGradient>
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#38bdf8"/>
+      <stop offset="100%" style="stop-color:#2dd4bf"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Icono cuadrado redondeado -->
+  <rect x="4" y="10" width="60" height="60" rx="16" fill="url(#iconGrad)" opacity="0.15" style="stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.15;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <rect x="4" y="10" width="60" height="60" rx="16" fill="none" stroke="url(#iconGrad)" stroke-width="1.5" style="fill:none;color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Gráfica de barras dentro del icono -->
+  <rect x="16" y="48" width="8" height="14" rx="2" fill="url(#iconGrad)" opacity="0.5" style="stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.5;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <rect x="28" y="38" width="8" height="24" rx="2" fill="url(#iconGrad)" opacity="0.75" style="stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.75;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <rect x="40" y="28" width="8" height="34" rx="2" fill="url(#iconGrad)" style="stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Línea trending up -->
+  <polyline points="16,46 28,36 40,26 52,18" fill="none" stroke="#2dd4bf" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="fill:none;stroke:rgb(45, 212, 191);color:rgb(255, 255, 255);stroke-width:2px;stroke-linecap:round;stroke-linejoin:round;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <circle cx="52" cy="18" r="3" fill="#2dd4bf" style="fill:rgb(45, 212, 191);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Texto "Finance" -->
+  <text x="76" y="42" font-family="Inter,system-ui,sans-serif" font-size="22" font-weight="800" letter-spacing="-0.5" fill="#f8fafc" style="fill:rgb(248, 250, 252);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:Inter, system-ui, sans-serif;font-size:22px;font-weight:800;text-anchor:start;dominant-baseline:auto">Finance</text>
+
+  <!-- Texto "Tracker" con degradado -->
+  <text x="76" y="64" font-family="Inter,system-ui,sans-serif" font-size="16" font-weight="500" letter-spacing="0.5" fill="url(#textGrad)" style="stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:Inter, system-ui, sans-serif;font-size:16px;font-weight:500;text-anchor:start;dominant-baseline:auto">TRACKER</text>
+</svg>
