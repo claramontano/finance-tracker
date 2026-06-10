@@ -5,6 +5,7 @@ import Filters from './components/Filters'
 import TransactionForm from './components/TransactionForm'
 import TransactionList from './components/TransactionList'
 import Charts from './components/Charts'
+import BudgetTracker from './components/BudgetTracker'
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <main className="max-w-7xl mx-auto px-6 py-8">
           <Summary />
           <Charts />
+          <BudgetTracker />
           <Filters />
           <TransactionForm />
           <TransactionList />
