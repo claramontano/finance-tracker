@@ -3,6 +3,7 @@ import Header from './components/Header'
 import Summary from './components/Summary'
 import Filters from './components/Filters'
 import TransactionForm from './components/TransactionForm'
+import TransactionList from './components/TransactionList'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Summary />
           <Filters />
           <TransactionForm />
+          <TransactionList />
         </main>
       </div>
     </FinanceProvider>
