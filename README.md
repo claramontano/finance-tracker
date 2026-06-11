@@ -1,16 +1,65 @@
-# React + Vite
+# Finance Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personal finance dashboard built with React, Tailwind CSS and Recharts.
 
-Currently, two official plugins are available:
+![Finance Tracker screenshot](./screenshot.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- Dashboard with balance, income, expenses and savings rate
+- Interactive charts: donut (by category), bar (income vs expenses), area (balance evolution)
+- Add, edit and delete transactions
+- Filter by month and search by description
+- Budget tracker per category with alerts
+- Export to CSV
+- Dark / light mode
+- Data persistence with localStorage
+- Responsive design
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech stack
 
-## Expanding the ESLint configuration
+- React 19
+- Vite
+- Tailwind CSS v3
+- Recharts (charts)
+- Context API + useReducer (global state)
+- localStorage (persistence)
+- Vercel (deploy)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Getting started
+
+```bash
+npm install
+npm run dev
+```
+
+## Project structure
+
+```
+src/
+├── context/
+│   └── FinanceContext.jsx   # Global state with useReducer
+├── hooks/
+│   └── useFinance.js        # Custom hook
+├── components/
+│   ├── Header.jsx
+│   ├── Summary.jsx          # Balance cards
+│   ├── Charts.jsx           # Recharts visualizations
+│   ├── BudgetTracker.jsx    # Budget progress bars
+│   ├── Filters.jsx          # Month filter and search
+│   ├── TransactionForm.jsx  # Add transactions modal
+│   ├── TransactionList.jsx  # Transaction history
+│   └── TransactionItem.jsx  # Single transaction with edit/delete
+└── utils/
+    ├── categories.js        # Categories and icons
+    ├── formatters.js        # Currency and date formatters
+    └── exportCSV.js         # CSV export with UTF-8
+```
+
+## Live demo
+
+[finance-tracker.vercel.app](https://finance-tracker.vercel.app)
+
+---
+
+Made by [Clara Montaño](https://github.com/claramontano)
