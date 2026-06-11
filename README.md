@@ -58,7 +58,7 @@ src/
 
 ## Live demo
 
-[finance-tracker.vercel.app](https://finance-tracker.vercel.app)
+[finance-tracker-green-psi.vercel.app](https://finance-tracker-green-psi.vercel.app)
 
 ---
 
