@@ -23,7 +23,7 @@ function Logo() {
       <rect x="40" y="28" width="8" height="34" rx="2" fill="url(#iconGrad)" />
       <polyline points="16,46 28,36 40,26 52,18" fill="none" stroke="#2dd4bf" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
       <circle cx="52" cy="18" r="3" fill="#2dd4bf" />
-      <text x="76" y="42" fontFamily="Inter,system-ui,sans-serif" fontSize="22" fontWeight="800" letterSpacing="-0.5" fill="#f8fafc">Finance</text>
+      <text x="76" y="42" fontFamily="Inter,system-ui,sans-serif" fontSize="22" fontWeight="800" letterSpacing="-0.5" fill="currentColor">Finance</text>
       <text x="76" y="64" fontFamily="Inter,system-ui,sans-serif" fontSize="16" fontWeight="500" letterSpacing="0.5" fill="url(#textGrad)">TRACKER</text>
     </svg>
   )
@@ -35,9 +35,11 @@ export default function Header() {
 
   return (
     <>
-      <header className="bg-gray-900 border-b border-gray-800 px-6 py-4 sticky top-0 z-50">
+      <header className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 px-6 py-4 sticky top-0 z-50 transition-colors duration-300">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <Logo />
+          <div className="text-gray-900 dark:text-white">
+            <Logo />
+          </div>
           <div className="flex items-center gap-2">
             <button
               onClick={() => setShowForm(true)}
@@ -47,13 +49,13 @@ export default function Header() {
             </button>
             <button
               onClick={() => exportToCSV(transactions)}
-              className="flex items-center gap-2 px-3 py-2.5 rounded-xl bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-white text-sm font-medium transition-all border border-gray-700"
+              className="flex items-center gap-2 px-3 py-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 text-sm font-medium transition-all border border-gray-200 dark:border-gray-700"
             >
               <span>📥</span> CSV
             </button>
             <button
               onClick={() => dispatch({ type: 'TOGGLE_DARK_MODE' })}
-              className="w-10 h-10 rounded-xl bg-gray-800 hover:bg-gray-700 border border-gray-700 flex items-center justify-center text-lg transition-all"
+              className="w-10 h-10 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700 flex items-center justify-center text-lg transition-all"
             >
               {darkMode ? '☀️' : '🌙'}
             </button>
@@ -61,10 +63,11 @@ export default function Header() {
         </div>
       </header>
 
-      {/* Modal de nueva transacción */}
       {showForm && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-          onClick={e => e.target === e.currentTarget && setShowForm(false)}>
+        <div
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+          onClick={e => e.target === e.currentTarget && setShowForm(false)}
+        >
           <div className="w-full max-w-lg">
             <TransactionForm onClose={() => setShowForm(false)} />
           </div>

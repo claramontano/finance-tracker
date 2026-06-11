@@ -9,7 +9,7 @@ import BudgetTracker from './components/BudgetTracker'
 function App() {
   return (
     <FinanceProvider>
-      <div className="min-h-screen bg-gray-950 text-white">
+      <div className="min-h-screen bg-gray-100 dark:bg-gray-950 text-gray-900 dark:text-white transition-colors duration-300">
         <Header />
         <main className="max-w-7xl mx-auto px-6 py-8">
           <Summary />

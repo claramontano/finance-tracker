@@ -11,8 +11,8 @@ import {
 function CustomTooltip({ active, payload, label }) {
   if (!active || !payload?.length) return null
   return (
-    <div className="bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 shadow-xl">
-      {label && <p className="text-gray-400 text-xs mb-1">{label}</p>}
+    <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3 shadow-xl">
+      {label && <p className="text-gray-500 dark:text-gray-400 text-xs mb-1">{label}</p>}
       {payload.map((p, i) => (
         <p key={i} className="text-sm font-bold" style={{ color: p.color }}>
           {p.name}: {typeof p.value === 'number' ? formatCurrency(p.value) : p.value}
@@ -25,7 +25,6 @@ function CustomTooltip({ active, payload, label }) {
 export default function Charts() {
   const { transactions, filteredTransactions } = useFinance()
 
-  // Dona — usa filteredTransactions
   const pieData = useMemo(() => {
     const expenses = filteredTransactions.filter(t => t.type === 'expense')
     const byCategory = {}
@@ -41,7 +40,6 @@ export default function Charts() {
       .slice(0, 6)
   }, [filteredTransactions])
 
-  // Barras — usa filteredTransactions
   const barData = useMemo(() => {
     const months = {}
     filteredTransactions.forEach(t => {
@@ -61,7 +59,6 @@ export default function Charts() {
       }))
   }, [filteredTransactions])
 
-  // Área — siempre histórico completo
   const areaData = useMemo(() => {
     let balance = 0
     const sorted = [...transactions].sort((a, b) => a.date.localeCompare(b.date))
@@ -80,9 +77,8 @@ export default function Charts() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
 
-      {/* Gráfica de dona */}
-      <div className="bg-gray-900 rounded-2xl p-6 border border-gray-800">
-        <h3 className="font-bold text-white mb-5">Gastos por categoría</h3>
+      <div className="bg-white dark:bg-gray-900 rounded-2xl p-6 border border-gray-200 dark:border-gray-800 transition-colors duration-300">
+        <h3 className="font-bold text-gray-900 dark:text-white mb-5">Gastos por categoría</h3>
         <div className="flex gap-4 items-center">
           <ResponsiveContainer width="50%" height={200}>
             <PieChart>
@@ -97,21 +93,20 @@ export default function Charts() {
               <div key={i} className="flex items-center justify-between gap-2">
                 <div className="flex items-center gap-2">
                   <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: d.color }}></span>
-                  <span className="text-xs text-gray-400 truncate">{d.icon} {d.name}</span>
+                  <span className="text-xs text-gray-500 dark:text-gray-400 truncate">{d.icon} {d.name}</span>
                 </div>
-                <span className="text-xs font-bold text-white">{formatCurrency(d.value)}</span>
+                <span className="text-xs font-bold text-gray-900 dark:text-white">{formatCurrency(d.value)}</span>
               </div>
             ))}
           </div>
         </div>
       </div>
 
-      {/* Gráfica de barras */}
-      <div className="bg-gray-900 rounded-2xl p-6 border border-gray-800">
-        <h3 className="font-bold text-white mb-5">Ingresos vs Gastos</h3>
+      <div className="bg-white dark:bg-gray-900 rounded-2xl p-6 border border-gray-200 dark:border-gray-800 transition-colors duration-300">
+        <h3 className="font-bold text-gray-900 dark:text-white mb-5">Ingresos vs Gastos</h3>
         <ResponsiveContainer width="100%" height={200}>
           <BarChart data={barData} barGap={4}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#374151" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" vertical={false} />
             <XAxis dataKey="month" tick={{ fill: '#9ca3af', fontSize: 11 }} axisLine={false} tickLine={false} />
             <YAxis tick={{ fill: '#9ca3af', fontSize: 11 }} axisLine={false} tickLine={false} tickFormatter={v => `${v}€`} />
             <Tooltip content={<CustomTooltip />} />
@@ -122,10 +117,9 @@ export default function Charts() {
         </ResponsiveContainer>
       </div>
 
-      {/* Gráfica de área — histórico completo */}
-      <div className="bg-gray-900 rounded-2xl p-6 border border-gray-800 lg:col-span-2">
-        <h3 className="font-bold text-white mb-1">Evolución del balance</h3>
-        <p className="text-xs text-gray-500 mb-5">Histórico completo — no se ve afectado por el filtro de mes</p>
+      <div className="bg-white dark:bg-gray-900 rounded-2xl p-6 border border-gray-200 dark:border-gray-800 lg:col-span-2 transition-colors duration-300">
+        <h3 className="font-bold text-gray-900 dark:text-white mb-1">Evolución del balance</h3>
+        <p className="text-xs text-gray-400 mb-5">Histórico completo — no se ve afectado por el filtro de mes</p>
         <ResponsiveContainer width="100%" height={200}>
           <AreaChart data={areaData}>
             <defs>
@@ -134,7 +128,7 @@ export default function Charts() {
                 <stop offset="95%" stopColor="#38bdf8" stopOpacity={0} />
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke="#374151" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" vertical={false} />
             <XAxis dataKey="month" tick={{ fill: '#9ca3af', fontSize: 11 }} axisLine={false} tickLine={false} />
             <YAxis tick={{ fill: '#9ca3af', fontSize: 11 }} axisLine={false} tickLine={false} tickFormatter={v => `${v}€`} />
             <Tooltip content={<CustomTooltip />} />
