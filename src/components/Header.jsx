@@ -5,15 +5,14 @@ import TransactionForm from './TransactionForm'
 
 function Logo() {
   return (
-    <svg viewBox="0 0 320 80" xmlns="http://www.w3.org/2000/svg" width="320" height="80">
+    <svg viewBox="0 0 320 80" xmlns="http://www.w3.org/2000/svg"
+      style={{ width: 'clamp(130px, 35vw, 240px)', height: 'auto', display: 'block' }}>
       <defs>
         <linearGradient id="iconGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#38bdf8" />
-          <stop offset="100%" stopColor="#2dd4bf" />
+          <stop offset="0%" stopColor="#38bdf8" /><stop offset="100%" stopColor="#2dd4bf" />
         </linearGradient>
         <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="#38bdf8" />
-          <stop offset="100%" stopColor="#2dd4bf" />
+          <stop offset="0%" stopColor="#38bdf8" /><stop offset="100%" stopColor="#2dd4bf" />
         </linearGradient>
       </defs>
       <rect x="4" y="10" width="60" height="60" rx="16" fill="url(#iconGrad)" opacity="0.15" />
@@ -35,30 +34,61 @@ export default function Header() {
 
   return (
     <>
-      <header className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 px-6 py-4 sticky top-0 z-50 transition-colors duration-300">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="text-gray-900 dark:text-white">
+      <header
+        style={{
+          position: 'sticky', top: 0, zIndex: 50,
+          borderBottom: '1px solid rgba(31,41,55,1)',
+          padding: '10px 12px',
+        }}
+        className="bg-white dark:bg-gray-900 transition-colors duration-300"
+      >
+        <div style={{
+          maxWidth: '1280px', margin: '0 auto',
+          display: 'flex', alignItems: 'center',
+          justifyContent: 'space-between', gap: '8px',
+          /* CLAVE: evita que los hijos desborden */
+          minWidth: 0, overflow: 'hidden'
+        }}>
+          {/* Logo: se encoge si hay poco espacio */}
+          <div style={{ flexShrink: 1, minWidth: 0, overflow: 'hidden' }}
+            className="text-gray-900 dark:text-white">
             <Logo />
           </div>
-          <div className="flex items-center gap-2">
+
+          {/* Botones: nunca se encogen */}
+          <div style={{ display: 'flex', gap: '8px', flexShrink: 0, alignItems: 'center' }}>
             <button
               onClick={() => setShowForm(true)}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-blue-500 hover:bg-blue-400 text-white font-bold text-sm transition-all shadow-lg shadow-blue-500/20"
+              style={{
+                display: 'flex', alignItems: 'center', gap: '6px',
+                padding: '8px 12px', borderRadius: '12px',
+                background: '#3b82f6', color: 'white',
+                fontWeight: 700, fontSize: '14px',
+                border: 'none', cursor: 'pointer', whiteSpace: 'nowrap'
+              }}
             >
-              <span className="text-lg leading-none">+</span> Nueva transacción
+              <span style={{ fontSize: '18px', lineHeight: 1 }}>+</span>
+              Nueva transacción
             </button>
             <button
               onClick={() => exportToCSV(transactions)}
-              className="flex items-center gap-2 px-3 py-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 text-sm font-medium transition-all border border-gray-200 dark:border-gray-700"
-            >
-              <span>📥</span> CSV
-            </button>
+              style={{
+                width: '36px', height: '36px', borderRadius: '10px',
+                border: '1px solid rgba(55,65,81,1)',
+                background: 'rgba(31,41,55,1)', cursor: 'pointer',
+                display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '16px'
+              }}
+              title="Exportar CSV"
+            >📥</button>
             <button
               onClick={() => dispatch({ type: 'TOGGLE_DARK_MODE' })}
-              className="w-10 h-10 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700 flex items-center justify-center text-lg transition-all"
-            >
-              {darkMode ? '☀️' : '🌙'}
-            </button>
+              style={{
+                width: '36px', height: '36px', borderRadius: '10px',
+                border: '1px solid rgba(55,65,81,1)',
+                background: 'rgba(31,41,55,1)', cursor: 'pointer',
+                display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '16px'
+              }}
+            >{darkMode ? '☀️' : '🌙'}</button>
           </div>
         </div>
       </header>

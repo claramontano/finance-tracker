@@ -11,7 +11,7 @@ function App() {
     <FinanceProvider>
       <div className="min-h-screen bg-gray-100 dark:bg-gray-950 text-gray-900 dark:text-white transition-colors duration-300">
         <Header />
-        <main className="max-w-7xl mx-auto px-6 py-8">
+        <main className="max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-8">
           <Summary />
           <Charts />
           <BudgetTracker />

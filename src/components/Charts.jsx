@@ -75,11 +75,37 @@ export default function Charts() {
   }, [transactions])
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
 
-      <div className="bg-white dark:bg-gray-900 rounded-2xl p-6 border border-gray-200 dark:border-gray-800 transition-colors duration-300">
-        <h3 className="font-bold text-gray-900 dark:text-white mb-5">Gastos por categoría</h3>
-        <div className="flex gap-4 items-center">
+      {/* Gráfica de dona — apilada en móvil, lado a lado en sm+ */}
+      <div className="bg-white dark:bg-gray-900 rounded-2xl p-4 sm:p-6 border border-gray-200 dark:border-gray-800 transition-colors duration-300">
+        <h3 className="font-bold text-gray-900 dark:text-white mb-4 sm:mb-5">Gastos por categoría</h3>
+
+        {/* Móvil: dona centrada arriba, leyenda debajo */}
+        <div className="flex flex-col items-center sm:hidden gap-4">
+          <ResponsiveContainer width="100%" height={180}>
+            <PieChart>
+              <Pie data={pieData} cx="50%" cy="50%" innerRadius={55} outerRadius={80} paddingAngle={3} dataKey="value">
+                {pieData.map((entry, i) => <Cell key={i} fill={entry.color} />)}
+              </Pie>
+              <Tooltip content={<CustomTooltip />} />
+            </PieChart>
+          </ResponsiveContainer>
+          <div className="w-full grid grid-cols-2 gap-x-4 gap-y-2">
+            {pieData.map((d, i) => (
+              <div key={i} className="flex items-center justify-between gap-1 min-w-0">
+                <div className="flex items-center gap-1.5 min-w-0">
+                  <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: d.color }}></span>
+                  <span className="text-xs text-gray-500 dark:text-gray-400 truncate">{d.icon} {d.name}</span>
+                </div>
+                <span className="text-xs font-bold text-gray-900 dark:text-white flex-shrink-0 ml-1">{formatCurrency(d.value)}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* sm+: dona izquierda, leyenda derecha */}
+        <div className="hidden sm:flex gap-4 items-center">
           <ResponsiveContainer width="50%" height={200}>
             <PieChart>
               <Pie data={pieData} cx="50%" cy="50%" innerRadius={55} outerRadius={85} paddingAngle={3} dataKey="value">
@@ -88,27 +114,34 @@ export default function Charts() {
               <Tooltip content={<CustomTooltip />} />
             </PieChart>
           </ResponsiveContainer>
-          <div className="flex-1 flex flex-col gap-2">
+          <div className="flex-1 flex flex-col gap-2 min-w-0">
             {pieData.map((d, i) => (
               <div key={i} className="flex items-center justify-between gap-2">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 min-w-0">
                   <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: d.color }}></span>
                   <span className="text-xs text-gray-500 dark:text-gray-400 truncate">{d.icon} {d.name}</span>
                 </div>
-                <span className="text-xs font-bold text-gray-900 dark:text-white">{formatCurrency(d.value)}</span>
+                <span className="text-xs font-bold text-gray-900 dark:text-white flex-shrink-0">{formatCurrency(d.value)}</span>
               </div>
             ))}
           </div>
         </div>
       </div>
 
-      <div className="bg-white dark:bg-gray-900 rounded-2xl p-6 border border-gray-200 dark:border-gray-800 transition-colors duration-300">
-        <h3 className="font-bold text-gray-900 dark:text-white mb-5">Ingresos vs Gastos</h3>
+      {/* Barras ingresos vs gastos */}
+      <div className="bg-white dark:bg-gray-900 rounded-2xl p-4 sm:p-6 border border-gray-200 dark:border-gray-800 transition-colors duration-300">
+        <h3 className="font-bold text-gray-900 dark:text-white mb-4 sm:mb-5">Ingresos vs Gastos</h3>
         <ResponsiveContainer width="100%" height={200}>
-          <BarChart data={barData} barGap={4}>
+          <BarChart data={barData} barGap={4} margin={{ left: -10, right: 0 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" vertical={false} />
             <XAxis dataKey="month" tick={{ fill: '#9ca3af', fontSize: 11 }} axisLine={false} tickLine={false} />
-            <YAxis tick={{ fill: '#9ca3af', fontSize: 11 }} axisLine={false} tickLine={false} tickFormatter={v => `${v}€`} />
+            <YAxis
+              tick={{ fill: '#9ca3af', fontSize: 10 }}
+              axisLine={false}
+              tickLine={false}
+              tickFormatter={v => v >= 1000 ? `${v / 1000}k` : v}
+              width={32}
+            />
             <Tooltip content={<CustomTooltip />} />
             <Legend wrapperStyle={{ fontSize: '12px', color: '#9ca3af' }} />
             <Bar dataKey="ingresos" fill="#34d399" radius={[4, 4, 0, 0]} name="Ingresos" />
@@ -117,11 +150,12 @@ export default function Charts() {
         </ResponsiveContainer>
       </div>
 
-      <div className="bg-white dark:bg-gray-900 rounded-2xl p-6 border border-gray-200 dark:border-gray-800 lg:col-span-2 transition-colors duration-300">
+      {/* Área evolución balance */}
+      <div className="bg-white dark:bg-gray-900 rounded-2xl p-4 sm:p-6 border border-gray-200 dark:border-gray-800 lg:col-span-2 transition-colors duration-300">
         <h3 className="font-bold text-gray-900 dark:text-white mb-1">Evolución del balance</h3>
-        <p className="text-xs text-gray-400 mb-5">Histórico completo — no se ve afectado por el filtro de mes</p>
+        <p className="text-xs text-gray-400 mb-4 sm:mb-5">Histórico completo — no se ve afectado por el filtro de mes</p>
         <ResponsiveContainer width="100%" height={200}>
-          <AreaChart data={areaData}>
+          <AreaChart data={areaData} margin={{ left: -10, right: 0 }}>
             <defs>
               <linearGradient id="balanceGrad" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor="#38bdf8" stopOpacity={0.3} />
@@ -130,7 +164,13 @@ export default function Charts() {
             </defs>
             <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" vertical={false} />
             <XAxis dataKey="month" tick={{ fill: '#9ca3af', fontSize: 11 }} axisLine={false} tickLine={false} />
-            <YAxis tick={{ fill: '#9ca3af', fontSize: 11 }} axisLine={false} tickLine={false} tickFormatter={v => `${v}€`} />
+            <YAxis
+              tick={{ fill: '#9ca3af', fontSize: 10 }}
+              axisLine={false}
+              tickLine={false}
+              tickFormatter={v => v >= 1000 ? `${v / 1000}k` : v}
+              width={32}
+            />
             <Tooltip content={<CustomTooltip />} />
             <Area type="monotone" dataKey="balance" stroke="#38bdf8" strokeWidth={2.5} fill="url(#balanceGrad)" name="Balance" />
           </AreaChart>

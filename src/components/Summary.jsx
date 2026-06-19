@@ -3,16 +3,16 @@ import { formatCurrency } from '../utils/formatters'
 
 function StatCard({ title, value, icon, color, subtitle }) {
   return (
-    <div className="bg-white dark:bg-gray-900 rounded-2xl p-6 border border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700 transition-all">
-      <div className="flex items-center justify-between mb-4">
-        <span className="text-gray-500 dark:text-gray-400 text-base font-medium">{title}</span>
-        <span className="text-3xl">{icon}</span>
+    <div className="bg-white dark:bg-gray-900 rounded-2xl p-4 sm:p-6 border border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700 transition-all">
+      <div className="flex items-center justify-between mb-3 sm:mb-4">
+        <span className="text-gray-500 dark:text-gray-400 text-xs sm:text-base font-medium leading-tight">{title}</span>
+        <span className="text-2xl sm:text-3xl flex-shrink-0">{icon}</span>
       </div>
-      <div className={`text-3xl font-black tracking-tight ${color}`}>
+      <div className={`text-xl sm:text-3xl font-black tracking-tight break-all ${color}`}>
         {value}
       </div>
       {subtitle && (
-        <p className="text-sm text-gray-400 dark:text-gray-500 mt-2">{subtitle}</p>
+        <p className="text-xs text-gray-400 dark:text-gray-500 mt-1.5 sm:mt-2">{subtitle}</p>
       )}
     </div>
   )
@@ -22,7 +22,7 @@ export default function Summary() {
   const { totals, totalBalance } = useFinance()
 
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8">
       <StatCard
         title="Balance total"
         value={formatCurrency(totalBalance)}

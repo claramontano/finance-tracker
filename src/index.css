@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-    font-size: 20px;
+
+* {
+    box-sizing: border-box;
+}
+
+/* Evita overflow horizontal global */
+html,
+body,
+#root {
+    max-width: 100%;
+    overflow-x: hidden;
 }

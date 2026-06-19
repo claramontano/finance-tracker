@@ -13,20 +13,18 @@ export default function Filters() {
   }
 
   return (
-    <div className="flex flex-wrap gap-3 mb-6">
-      <div className="flex-1 min-w-48">
-        <input
-          type="text"
-          placeholder="🔍 Buscar transacción..."
-          value={search}
-          onChange={e => dispatch({ type: 'SET_SEARCH', payload: e.target.value })}
-          className="w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-2.5 text-sm text-gray-900 dark:text-white placeholder-gray-400 outline-none focus:border-blue-500 transition-colors"
-        />
-      </div>
+    <div className="flex flex-col sm:flex-row gap-3 mb-4 sm:mb-6">
+      <input
+        type="text"
+        placeholder="🔍 Buscar transacción..."
+        value={search}
+        onChange={e => dispatch({ type: 'SET_SEARCH', payload: e.target.value })}
+        className="w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-2.5 text-sm text-gray-900 dark:text-white placeholder-gray-400 outline-none focus:border-blue-500 transition-colors"
+      />
       <select
         value={filterMonth}
         onChange={e => dispatch({ type: 'SET_FILTER_MONTH', payload: e.target.value })}
-        className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-2.5 text-sm text-gray-900 dark:text-white outline-none focus:border-blue-500 transition-colors"
+        className="w-full sm:w-auto bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-2.5 text-sm text-gray-900 dark:text-white outline-none focus:border-blue-500 transition-colors"
       >
         <option value="">Todos los meses</option>
         {months.map(m => (
